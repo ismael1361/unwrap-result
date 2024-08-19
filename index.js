@@ -1,11 +1,28 @@
 ((global) => {
 	global.Symbol.result = Symbol("result");
 
-	function cloneFunc(thisArg, fn) {
+	function cloneFunc(scope, fn) {
 		if (typeof fn !== "function") {
 			return fn;
 		}
-		return fn.bind(thisArg);
+		return fn.bind(scope);
+	}
+
+	function cloneObj(obj) {
+		if (obj && typeof obj === "object" && !(obj instanceof Promise)) {
+			const clone = { ...obj };
+			for (const prop in obj) {
+				const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+				Object.defineProperty(clone, prop, {
+					...descriptor,
+					value: cloneFunc(obj, obj[prop]),
+				});
+			}
+
+			return clone;
+		}
+
+		return obj;
 	}
 
 	global.Function.prototype[Symbol.result] = function (...args) {
@@ -16,15 +33,7 @@
 				return result[Symbol.result]();
 			}
 
-			if (result && typeof result === "object" && !(result instanceof Promise)) {
-				const clone = { ...result };
-				for (const k in result) {
-					clone[k] = cloneFunc(this, result[k]);
-				}
-				return [null, clone];
-			}
-
-			return [null, result];
+			return [null, cloneObj(result)];
 		} catch (error) {
 			return [error || new Error("Throw error is falsy"), null];
 		}
@@ -33,16 +42,7 @@
 	global.Promise.prototype[Symbol.result] = async function () {
 		try {
 			const result = await this;
-
-			if (result && typeof result === "object" && !(result instanceof Promise)) {
-				const clone = { ...result };
-				for (const k in result) {
-					clone[k] = cloneFunc(result, result[k]);
-				}
-				return [null, clone];
-			}
-
-			return [null, result];
+			return [null, cloneObj(result)];
 		} catch (error) {
 			return [error || new Error("Throw error is falsy"), null];
 		}

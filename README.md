@@ -28,6 +28,10 @@ Você pode incluir o módulo `unwrap-result` em seu projeto de diferentes maneir
 
 Após incluir o módulo, os métodos serão adicionados globalmente aos protótipos de funções e Promises. Você pode usar os métodos `Symbol.result` para tratar resultados e erros de maneira segura.
 
+```javascript
+import 'unwrap-result';
+```
+
 ### Exemplo de Uso
 
 ```javascript
@@ -56,10 +60,6 @@ Adiciona um método ao protótipo das funções e Promises para executar uma fun
 
 - O primeiro valor é um possível erro (ou `null` se não houver erro).
 - O segundo valor é o resultado da operação.
-
-### `Symbol.result`
-
-Funciona de forma semelhante ao `Symbol.result`, mas pode ser utilizado para encadear chamadas em Promises.
 
 ## Compatibilidade
 
