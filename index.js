@@ -10,13 +10,11 @@
 
 	function cloneObj(obj) {
 		if (obj && typeof obj === "object" && !(obj instanceof Promise)) {
-			const clone = { ...obj };
+			const clone = Object.assign({}, obj);
 			for (const prop in obj) {
 				const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
-				Object.defineProperty(clone, prop, {
-					...descriptor,
-					value: cloneFunc(obj, obj[prop]),
-				});
+				descriptor.value = cloneFunc(obj, obj[prop]);
+				Object.defineProperty(clone, prop, descriptor);
 			}
 
 			return clone;
@@ -25,9 +23,9 @@
 		return obj;
 	}
 
-	global.Function.prototype[Symbol.result] = function (...args) {
+	global.Function.prototype[Symbol.result] = function () {
 		try {
-			const result = this.apply(this, args);
+			const result = this.apply(this, arguments);
 
 			if (result && typeof result === "object" && Symbol.result in result) {
 				return result[Symbol.result]();
