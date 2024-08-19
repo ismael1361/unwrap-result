@@ -34,6 +34,8 @@ import 'unwrap-result';
 
 ### Exemplo de Uso
 
+#### Função assíncrona
+
 ```javascript
 // Usando o método em uma função
 const [err, res] = await fetch[Symbol.result]('https://api.example.com');
@@ -50,6 +52,27 @@ if (jsonErr) {
 } else {
     console.log('Dados recebidos:', json);
 }
+```
+
+#### Função síncrona
+
+```javascript
+// Usando o método em uma função
+const fn = function (a: number, b: any){
+    if(typeof a !== "number" || typeof b !== "number"){
+        throw "Só é aceitável parâmetros do tipo number";
+    }
+    return (a + b) / 2;
+}
+
+const [err, res] = fn[Symbol.result](1, 2);
+
+if (err) {
+    console.error('Erro ao executar a função:', err);
+    return;
+}
+
+console.log('Resultado:', res);
 ```
 
 ## Métodos Adicionados

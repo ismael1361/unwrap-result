@@ -4,10 +4,9 @@ declare global {
 	}
 
 	interface Function {
-		[Symbol.result]<A extends any[], R>(
-			this: (...args: A) => R | Promise<R>,
-			...args: A
-		): [Error, null] | [null, R] | Promise<[Error, null] | [null, R]>;
+		[Symbol.result]<A extends any[], R extends Promise<any>>(this: (...args: A) => R, ...args: A): Promise<[Error, null] | [null, Awaited<R>]>;
+
+		[Symbol.result]<A extends any[], R>(this: (...args: A) => R, ...args: A): [Error, null] | [null, R];
 	}
 
 	interface Promise<T> {
@@ -20,10 +19,9 @@ interface SymbolConstructor {
 }
 
 interface Function {
-	[Symbol.result]<A extends any[], R>(
-		this: (...args: A) => R | Promise<R>,
-		...args: A
-	): [Error, null] | [null, R] | Promise<[Error, null] | [null, R]>;
+	[Symbol.result]<A extends any[], R extends Promise<any>>(this: (...args: A) => R, ...args: A): Promise<[Error, null] | [null, Awaited<R>]>;
+
+	[Symbol.result]<A extends any[], R>(this: (...args: A) => R, ...args: A): [Error, null] | [null, R];
 }
 
 interface Promise<T> {
