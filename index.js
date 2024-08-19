@@ -13,8 +13,13 @@
 			const clone = Object.assign({}, obj);
 			for (const prop in obj) {
 				const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
-				descriptor.value = cloneFunc(obj, obj[prop]);
-				Object.defineProperty(clone, prop, descriptor);
+				Object.defineProperty(
+					clone,
+					prop,
+					Object.assign({}, descriptor, {
+						value: cloneFunc(obj, obj[prop]),
+					}),
+				);
 			}
 
 			return clone;
