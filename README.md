@@ -21,7 +21,7 @@ Você pode incluir o módulo `unwrap-result` em seu projeto de diferentes maneir
 1. **Via script tag**: Adicione o seguinte script ao seu HTML:
 
     ```html
-    <script src="caminho/para/unwrap-result.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/unwrap-result@latest/index.js"></script>
     ```
 
 ## Uso

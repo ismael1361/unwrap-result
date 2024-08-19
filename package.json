@@ -1,7 +1,7 @@
 {
 	"name": "unwrap-result",
 	"type": "module",
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"description": "Um método que executa uma função ou Promise de forma segura, retornando um array com dois valores: o primeiro é um possível erro (ou null se não houver erro), e o segundo é o resultado da operação. Isso permite lidar com erros e resultados de forma consistente, sem usar blocos try-catch.",
 	"main": "index.js",
 	"module": "./index.js",
