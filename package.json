@@ -1,0 +1,25 @@
+{
+	"name": "unwrap-result",
+	"type": "module",
+	"version": "0.1.0",
+	"description": "Um método que executa uma função ou Promise de forma segura, retornando um array com dois valores: o primeiro é um possível erro (ou null se não houver erro), e o segundo é o resultado da operação. Isso permite lidar com erros e resultados de forma consistente, sem usar blocos try-catch.",
+	"main": "index.js",
+	"module": "./index.js",
+	"types": "./global.d.ts",
+	"browser": {
+		"./index.js": "./index.js"
+	},
+	"repository": "github:ismael1361/unwrap-result",
+	"author": "ISMAEL1361 <ismael1361@gmail.com> (https://github.com/ismael1361)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ismael1361/unwrap-result/issues"
+	},
+	"homepage": "https://github.com/ismael1361/unwrap-result#readme",
+	"devDependencies": {
+		"typescript": "^5.5.4"
+	},
+	"engines": {
+		"node": ">= 12"
+	}
+}
